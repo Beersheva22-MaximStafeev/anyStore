@@ -1,0 +1,10 @@
+{
+    "pages": [
+        {"to": "/", "label": "Products", "roles": ["notAuthenticated", "user", "admin"], "order": 1},
+        {"to": "/shoppingCart", "label": "Shoping cart", "roles": ["user"], "order": 2},
+        {"to": "/orders", "label": "Orders", "roles": ["user", "admin"], "order": 3},
+        {"to": "/uesrs", "label": "User management", "roles": ["admin"], "order": 5},
+        {"to": "/signin", "label": "Sign In", "roles": ["notAuthenticated"], "order": 500},
+        {"to": "/signout", "label": "Sign Out", "roles": ["authenticated"],"order": 1000}
+    ]
+}
