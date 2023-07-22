@@ -7,13 +7,13 @@ import routesConfig from './config/routes-config.json';
 import SignIn from "./components/pages/SignIn";
 import SignOut from "./components/pages/SignOut";
 import NotFound from "./components/pages/NotFound";
-import Orders from "./components/pages/Orders";
+import Orders from "./components/pages/Orders/Orders";
 import ShoppingCart from "./components/pages/ShoppingCart";
 import Users from "./components/pages/Users";
-import Products from "./components/pages/Products";
+import Products from "./components/pages/Products/Products";
 // import Employees from "./components/pages/Employees";
 // import AddEmployee from "./components/pages/AddEmployee";
-// import AgeStatistics from "./components/pages/AgeStatistics";
+// import AgeStatistics from "./components/pages/AgeStatistics"; 
 // import SalaryStatistics from "./components/pages/SalaryStatistics";
 // import Generation from "./components/pages/Generation";
 import './App.css'
@@ -35,7 +35,14 @@ type RouteTypeOrder = RouteType & { order?: number }
 
 function getRoutes(userData: UserData): RouteType[] {
   const role = userData ? userData.role : "notAuthenticated";
-  return pages.filter(page => (page.roles as string[]).some(r => r === role || userData && (r === "authenticated")));
+  return pages
+    .filter(page => (page.roles as string[]).some(r => r === role || userData && (r === "authenticated")))
+    .map(route => {
+      if (route.to === "/signout") {
+        route.label = userData?.email ?? route.label;
+      }
+      return route;
+    });
 }
 
 function isDevelopment(): boolean {

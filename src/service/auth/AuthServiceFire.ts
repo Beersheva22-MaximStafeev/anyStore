@@ -28,7 +28,11 @@ export default class AuthServiceFire implements AuthService {
             const userAuth = loginData.email === "GOOGLE" ? 
                 await signInWithPopup(this.auth, new GoogleAuthProvider()) :
                 await signInWithEmailAndPassword(this.auth, loginData.email, loginData.password);
-            userData = {email: userAuth.user.email!, role: (await this.isAdmin(userAuth.user.uid)) ? "admin": "user"}
+            userData = {
+                email: userAuth.user.email!, 
+                role: (await this.isAdmin(userAuth.user.uid)) ? "admin": "user",
+                uid: userAuth.user.uid
+            }
         } catch (error) {
 
         }

@@ -7,7 +7,7 @@ function getUserData(data: any): UserData {
     localStorage.setItem(AUTH_DATA_JWT,jwt);
     const jwtPayloadJSON = atob(jwt.split('.')[1]);
     const jwtPayloadObj = JSON.parse(jwtPayloadJSON);
-    return {email: jwtPayloadObj.email, role: jwtPayloadObj.sub}
+    return {email: jwtPayloadObj.email, role: jwtPayloadObj.sub, uid: jwtPayloadObj.email}
 
 }
 export default class AuthServiceJwt implements AuthService {
