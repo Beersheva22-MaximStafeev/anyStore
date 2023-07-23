@@ -55,11 +55,12 @@ const OrdersAdmin: React.FC = () => {
     const currentOrderId = useRef<string>("");
     const currentOrder = useRef<OrderDetail>();
     const [showDetail, setShowDetail] = useState<boolean>(false);
+    const [needUpdate, setNeedUpdate] = useState<boolean>(false);
     useEffect(() => {
         ordersService.getAllOrders()
             .then(data => setOrdersAll(data))
             .catch(error => dispatchResultCode(error as string, ""));
-    }, []);
+    }, [needUpdate]);
     
     async function updateDate(event: any) {
         event.preventDefault();
@@ -70,6 +71,7 @@ const OrdersAdmin: React.FC = () => {
         setPicDataDelivery(false);
         ordersService.updateOrderDeliveryDatetimeAndStatus(currentOrderId.current, newDate)
             .catch(error => dispatchResultCode(error, ""));
+        setNeedUpdate(!needUpdate);
     }
 
     return <Box>

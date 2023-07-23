@@ -11,11 +11,7 @@ import Orders from "./components/pages/Orders/Orders";
 import ShoppingCart from "./components/pages/ShoppingCart";
 import Users from "./components/pages/Users";
 import Products from "./components/pages/Products/Products";
-// import Employees from "./components/pages/Employees";
-// import AddEmployee from "./components/pages/AddEmployee";
-// import AgeStatistics from "./components/pages/AgeStatistics"; 
-// import SalaryStatistics from "./components/pages/SalaryStatistics";
-// import Generation from "./components/pages/Generation";
+
 import './App.css'
 import { useDispatch } from "react-redux";
 import { useSelectorAuth } from "./redux/store";

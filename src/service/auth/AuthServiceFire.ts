@@ -22,6 +22,14 @@ export default class AuthServiceFire implements AuthService {
         // return false;
     }
 
+    isEmailVerifyed():boolean {
+        let res: boolean = false;
+        if (this.auth.currentUser) {
+            res = this.auth.currentUser?.emailVerified;
+        }
+        return res;
+    }
+
     async login(loginData: LoginData): Promise<UserData> {
         let userData: UserData = null;
         try {

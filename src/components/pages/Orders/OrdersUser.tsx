@@ -18,7 +18,7 @@ const OrdersUser: React.FC = () => {
     return <Box>
         <TableContainer component={Paper}>
             {ordersAll.map(order => 
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <Table sx={{ minWidth: 700 }} aria-label="customized table" key={order.id}>
                     <TableHead>
                         <TableRow>
                             <TableCell align="right">Order:</TableCell>
@@ -45,7 +45,7 @@ const OrdersUser: React.FC = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {order.prodicts.map(product => <TableRow>
+                                    {order.prodicts.map(product => <TableRow key={product.id}>
                                         <TableCell>{product.name}</TableCell>
                                         <TableCell>{product.price}</TableCell>
                                         <TableCell>{product.count}</TableCell>

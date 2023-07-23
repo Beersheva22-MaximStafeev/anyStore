@@ -17,20 +17,6 @@ import InputResult from '../../model/InputResult';
 import { Alert, Snackbar } from '@mui/material';
 import { StatusType } from '../../model/StatusType';
 
-function Copyright(props: any) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://tel-ran.com/">
-                Tel-Ran
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 type Props = {
     submitFn: (loginData: LoginData) => Promise<InputResult>
@@ -123,7 +109,6 @@ const SignInForm: React.FC<Props> = ({ submitFn }) => {
                         </Alert>
                     </Snackbar>
                 </Box>
-                <Copyright sx={{ mt: 4, mb: 4 }} />
             </Container>
         </ThemeProvider>
     );

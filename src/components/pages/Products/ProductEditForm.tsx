@@ -1,4 +1,4 @@
-import { Box, Button, Grid, ImageList, ImageListItem, InputLabel, MenuItem, Select, TextField } from "@mui/material"
+import { Autocomplete, Box, Button, Grid, ImageList, ImageListItem, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import InputResult from "../../../model/InputResult"
 import Product from "../../../model/Product"
 import { ChangeEvent, useState } from "react"
@@ -98,12 +98,6 @@ export const ProductEditForm: React.FC<Props> = ({ callbackFn, productUpdated })
             dispatchResultCode("Error uploading file: " + error, "");
         }
     }
-    // function uploadFile(event: ChangeEvent<HTMLInputElement>) {
-    //     if (event.target.files) {
-    //         const curFile = event.target.files[0];
-
-    //     }
-    // }
     console.log(`image: ${product.imageUrl}`);
     return <Box>
         <form onSubmit={onSubmitFn} onReset={onResetFn}>
@@ -113,7 +107,7 @@ export const ProductEditForm: React.FC<Props> = ({ callbackFn, productUpdated })
                         helperText="Enter product name" onChange={handlerProductName} value={product.name}/> 
                 </Grid>
                 <Grid item>
-                    <TextField type="text" required label="Product category"
+                        <TextField type="text" required label="Product category"
                         helperText="Enter product category" onChange={handlerProductCategory} value={product.category}/>
                 </Grid>
                 <Grid item>

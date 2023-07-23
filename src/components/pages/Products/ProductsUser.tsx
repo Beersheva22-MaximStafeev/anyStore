@@ -61,7 +61,8 @@ const ProductsUser: React.FC = () => {
             <Grid container alignItems="center">
                 <Grid item>
             {categories.map(category => 
-                <Button variant={categoryCurrent === category ? "outlined" : "text"} onClick={() => setCategoryCurrent(categoryCurrent === category ? "" : category)}>{category}</Button>)}
+                <Button variant={categoryCurrent === category ? "outlined" : "text"} 
+                    onClick={() => setCategoryCurrent(categoryCurrent === category ? "" : category)} key={category}>{category}</Button>)}
                 </Grid>
                 <Grid item>
             <InputLabel id="demo-simple-select-label">Products per page</InputLabel>
@@ -86,16 +87,16 @@ const ProductsUser: React.FC = () => {
         <Box>
             {pagesCount > 1 && <Pagination count={pagesCount} page={currentPage} onChange={(event: any, value: number) => setCurrentPage(value)}/>}
         </Box>
-        <Grid container>
+        <Grid container justifyContent={"center"} spacing={"10px"}>
             {productsToShow.map(product => <Grid item key={product.id}>
                 
-                <Card sx={{maxWidth: "200px"}}>
+                <Card sx={{width: "300px", minHeight: "250px", padding: "10px"}}>
                     <Box>
                         <CardMedia component="img" height="100px" width="100px" image={product.imageUrl} title={product.description}/>
-                        <CardContent>
+                        <CardContent sx={{height: "250px"}}>
                             <Typography gutterBottom variant="h6" component="div">{product.name}</Typography>
+                            <Typography>${product.price} / {product.unit}</Typography>
                             <Typography variant="body2" color="text.secondary">{product.description.length > MAX_LENGTH ? product.description.substring(0, MAX_LENGTH) + "..." : product.description}</Typography>
-                            <Typography>{product.price} / {product.unit}</Typography>
                         </CardContent>
                     </Box>
                     <Box>

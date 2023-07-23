@@ -1,7 +1,7 @@
-import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSelectorAuth } from "../../redux/store";
-import { ordersService, productService, shoppingCartService } from "../../config/service-config";
+import { authService, ordersService, productService, shoppingCartService } from "../../config/service-config";
 import { useDispatchCode } from "../../hooks/hooks";
 import { ProductAdd, ShoppingCardDetails } from "../../model/ShoppingCartDetails";
 import Product from "../../model/Product";
@@ -34,8 +34,9 @@ const ShoppingCart: React.FC = () => {
         const res = await ordersService
             .submitShoppingCart(userData?.uid, allProducts, deliveryAddress)
             .then(res => {
-                // shoppingCartService.clearShoppingCart(userData?.uid);
+                shoppingCartService.clearShoppingCart(userData?.uid);
                 dispatchResultCode("", res.message ? res.message : "Order successfully added");
+                setNeedUpdate(!needUpdate);
             })
             .catch(error => dispatchResultCode(error, ""));
 
@@ -95,11 +96,14 @@ const ShoppingCart: React.FC = () => {
             </TableBody>
         </Table>
         </TableContainer>
-        <form onSubmit={onSubmitFn}>
-            <TextField type="text" required label="Delivery address" helperText="Enter delivery address" 
-                onChange={(event: any) => setDeliveryAddress(event.target.value)}/>
-            <Button type="submit">Submit order</Button>
-        </form>
+        {authService.isEmailVerifyed() ? 
+            <form onSubmit={onSubmitFn}>
+                <TextField type="text" required label="Delivery address" helperText="Enter delivery address" 
+                    onChange={(event: any) => setDeliveryAddress(event.target.value)}/>
+                <Button type="submit">Submit order</Button>
+            </form> : 
+            <Typography>Confirm your email to order</Typography>
+        }
 
     </Box>
 }
